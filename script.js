@@ -22,12 +22,35 @@ DomElement.prototype.addElem = function () {
     newDiv.style.cssText = `height: ${this.height}px;
     width: ${this.width}px;
     background: ${this.bg};
-    font-size: ${this.fontSize}px;`;
+    font-size: ${this.fontSize}px;
+    position: absolute;`;
 
     newDiv.innerHTML = 'Hello world!';
     document.body.append(newDiv);
 };
 
-const newDom = new DomElement('.mydiv', 500, 400, 'red', 50);
-newDom.addElem();
+
+const newDom = new DomElement('.mydiv', 100, 100, 'green', 20);
+
+document.addEventListener('DOMContentLoaded', newDom.addElem());
+
+document.addEventListener('keydown', function (event) {
+    console.log(event);
+    let press = document.getElementsByTagName('div');
+    let x = press[0].offsetLeft;
+    let y = press[0].offsetTop;
+    if (event.code === "ArrowLeft") {
+        x -= 10;
+        press[0].style.left = `${x}px`;
+    } else if (event.code === "ArrowRight") {
+        x += 10;
+        press[0].style.left = `${x}px`;
+    } else if (event.code === "ArrowUp") {
+        y -= 10;
+        press[0].style.top = `${y}px`;
+    } else if (event.code === "ArrowDown") {
+        y += 10;
+        press[0].style.top = `${y}px`;
+    } 
+});
 
